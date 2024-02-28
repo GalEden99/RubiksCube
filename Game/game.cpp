@@ -36,12 +36,15 @@ void Game::Init()
 			for (float k = -distance; k <= distance; k += 1){
 				AddShape(Scene::Cube, -1, Scene::TRIANGLES);
 				SetShapeTex(index, 0);
+				rubikCube->AddInnerCube(new InnerCube(glm::vec3(i, j, k), index));
 				shapes[index]->MyTranslate(glm::vec3(i, j, k), 0);
 				shapes[index]->MyScale(glm::vec3(0.5, 0.5, 0.5));
 				index++;
 			}
 		}
 	}
+
+	rubikCube->printCubes();
 	
 	pickedShape = 0;
 	
@@ -86,4 +89,82 @@ void Game::Motion()
 
 Game::~Game(void)
 {
+}
+
+void Game::rotateFront()
+{
+	std::vector<InnerCube *> innerCubes = rubikCube->GetInnerCubes();
+	for (InnerCube* cube : innerCubes){
+		if (cube->GetPosition().z == 1){
+			int index = cube->GetIndex();
+			std::cout << "index: " << index << std::endl;
+			shapes[index]->MyRotate(direction*angle, glm::vec3(0, 0, 1), 0);
+		}
+	}
+	rubikCube->printCubes();
+}
+
+void Game::rotateBack()
+{
+	std::vector<InnerCube *> innerCubes = rubikCube->GetInnerCubes();
+	for (InnerCube* cube : innerCubes){
+		if (cube->GetPosition().z == -1){
+			int index = cube->GetIndex();
+			std::cout << "index: " << index << std::endl;
+			shapes[index]->MyRotate(direction*angle, glm::vec3(0, 0, 1), 0);
+		}
+	}
+		rubikCube->printCubes();
+}
+
+void Game::rotateRight()
+{
+	std::vector<InnerCube *> innerCubes = rubikCube->GetInnerCubes();
+	for (InnerCube* cube : innerCubes){
+		if (cube->GetPosition().x == 1){
+			int index = cube->GetIndex();
+			std::cout << "index: " << index << std::endl;
+			shapes[index]->MyRotate(direction*angle, glm::vec3(1, 0, 0), 0);
+		}
+	}
+		rubikCube->printCubes();
+}
+
+void Game::rotateLeft()
+{
+	std::vector<InnerCube *> innerCubes = rubikCube->GetInnerCubes();
+	for (InnerCube* cube : innerCubes){
+		if (cube->GetPosition().x == -1){
+			int index = cube->GetIndex();
+			std::cout << "index: " << index << std::endl;
+			shapes[index]->MyRotate(direction*angle, glm::vec3(1, 0, 0), 0);
+		}
+	}
+		rubikCube->printCubes();
+}
+
+void Game::rotateUp()
+{
+	std::vector<InnerCube *> innerCubes = rubikCube->GetInnerCubes();
+	for (InnerCube* cube : innerCubes){
+		if (cube->GetPosition().y == 1){
+			int index = cube->GetIndex();
+			std::cout << "index: " << index << std::endl;
+			shapes[index]->MyRotate(direction*angle, glm::vec3(0, 1, 0), 0);
+		}
+	}
+		rubikCube->printCubes();
+}
+
+void Game::rotateDown()
+{
+	std::vector<InnerCube *> innerCubes = rubikCube->GetInnerCubes();
+	for (InnerCube* cube : innerCubes){
+		if (cube->GetPosition().y == -1){
+			int index = cube->GetIndex();
+			std::cout << "index: " << index << std::endl;
+			shapes[index]->MyRotate(direction*angle, glm::vec3(0, 1, 0), 0);
+		}
+	}
+		rubikCube->printCubes();
 }

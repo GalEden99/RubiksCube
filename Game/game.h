@@ -13,6 +13,15 @@ public:
 	void WhenRotate();
 	void WhenTranslate();
 	void Motion();
+	void rotateFront();
+	void rotateBack();
+	void rotateLeft();
+	void rotateRight();
+	void rotateUp();
+	void rotateDown();
 	~Game(void);
+
+	int direction = 1;
+	int angle = 90;
 };
 

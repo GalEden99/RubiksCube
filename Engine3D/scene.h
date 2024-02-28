@@ -4,6 +4,7 @@
 #include "camera.h"
 #include "VertexArray.hpp"
 #include <vector>
+#include "../Components/RubikCube.h"
 
 
 class Scene : public MovableGLM
@@ -62,6 +63,8 @@ public:
 	
 	inline void SetShapeTex(int shpIndx,int texIndx){shapes[shpIndx]->SetTexture(texIndx);} 
 	inline void SetShapeShader(int shpIndx,int shdrIndx){shapes[shpIndx]->SetShader(shdrIndx);} 
+
+	
 	
 private:	
 	
@@ -73,6 +76,7 @@ private:
 	void Clear(float r, float g, float b, float a);
 
 protected:
+	RubikCube* rubikCube;
 	std::vector<Shape*> shapes;
 	std::vector<Shader*> shaders;
 	std::vector<int> chainParents;

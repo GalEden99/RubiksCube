@@ -25,6 +25,7 @@
 		xold = 0;
 		yold = 0;
 		isActive = false;
+		rubikCube = new RubikCube();
 	}
 
 	Scene::Scene(float angle,float relationWH,float near1, float far1)
@@ -37,6 +38,7 @@
 		xold = 0;
 		yold = 0;
 		isActive = false;
+		rubikCube = new RubikCube();
 	}
 
 	void Scene::AddShapeFromFile(const std::string& fileName,int parent,unsigned int mode)

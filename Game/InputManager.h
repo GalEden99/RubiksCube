@@ -47,6 +47,24 @@
 					//cout<< "down: "<<endl;
 					scn->MoveCamera(0,scn->zTranslate,-0.4f);
 					break;
+				case GLFW_KEY_F:
+					scn->rotateFront();
+					break;
+				case GLFW_KEY_B:
+					scn->rotateBack();
+					break;
+				case GLFW_KEY_L:
+					scn->rotateLeft();
+					break;
+				case GLFW_KEY_R:
+					scn->rotateRight();
+					break;				
+				case GLFW_KEY_U:
+					scn->rotateUp();
+					break;
+				case GLFW_KEY_D:
+					scn->rotateDown();
+					break;
 
 			default:
 				break;
