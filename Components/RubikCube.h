@@ -12,6 +12,7 @@ class RubikCube {
         void UpdateInnerCubePosition(int index, glm::vec3 position);
         InnerCube* GetInnerCube(int index);
         std::vector<InnerCube *> GetInnerCubes();
+        void rotateFront();
 
         void printCubes();
         ~RubikCube();

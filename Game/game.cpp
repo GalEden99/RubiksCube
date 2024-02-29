@@ -94,13 +94,15 @@ Game::~Game(void)
 void Game::rotateFront()
 {
 	std::vector<InnerCube *> innerCubes = rubikCube->GetInnerCubes();
+	std::vector<InnerCube *> rotatedCubes = std::vector<InnerCube *>();
 	for (InnerCube* cube : innerCubes){
 		if (cube->GetPosition().z == 1){
 			int index = cube->GetIndex();
-			std::cout << "index: " << index << std::endl;
+			std::cout << "index front: " << index << std::endl;
 			shapes[index]->MyRotate(direction*angle, glm::vec3(0, 0, 1), 0);
 		}
 	}
+	rubikCube->rotateFront();
 	rubikCube->printCubes();
 }
 
@@ -123,7 +125,7 @@ void Game::rotateRight()
 	for (InnerCube* cube : innerCubes){
 		if (cube->GetPosition().x == 1){
 			int index = cube->GetIndex();
-			std::cout << "index: " << index << std::endl;
+			std::cout << "index Right: " << index << std::endl;
 			shapes[index]->MyRotate(direction*angle, glm::vec3(1, 0, 0), 0);
 		}
 	}
@@ -168,3 +170,4 @@ void Game::rotateDown()
 	}
 		rubikCube->printCubes();
 }
+
