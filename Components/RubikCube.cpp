@@ -112,30 +112,128 @@ std::map<glm::vec3, glm::vec3, RubikCube::Vec3Comparator> vecMap;
 void RubikCube::rotateLeft(int direction) {
 std::map<glm::vec3, glm::vec3, RubikCube::Vec3Comparator> vecMap;
 if (direction < 0) {
-    vecMap[glm::vec3(-1,-1,1)] = glm::vec3(-1,-1,-1);
-    vecMap[glm::vec3(-1,0,1)] = glm::vec3(-1,0,0);
-    vecMap[glm::vec3(-1,1,1)] = glm::vec3(-1,1,1);
-    vecMap[glm::vec3(-1,-1,0)] = glm::vec3(-1,-1,1);
+    vecMap[glm::vec3(-1,-1,-1)] = glm::vec3(-1,-1,1);
+    vecMap[glm::vec3(-1,0,-1)] = glm::vec3(-1,-1,0);
+    vecMap[glm::vec3(-1,1,-1)] = glm::vec3(-1,-1,-1);
+    vecMap[glm::vec3(-1,-1,0)] = glm::vec3(-1,0,1);
     vecMap[glm::vec3(-1,0,0)] = glm::vec3(-1,0,0);
-    vecMap[glm::vec3(-1,1,0)] =  glm::vec3(-1,1,-1);
-    vecMap[glm::vec3(-1,-1,-1)] = glm::vec3(-1,-1,0);
-    vecMap[glm::vec3(-1,0,-1)] = glm::vec3(-1,0,-1);
-    vecMap[glm::vec3(-1,1,-1)] = glm::vec3(-1,1,0);
+    vecMap[glm::vec3(-1,1,0)] =  glm::vec3(-1,0,-1);
+    vecMap[glm::vec3(-1,-1,1)] = glm::vec3(-1,1,1);
+    vecMap[glm::vec3(-1,0,1)] = glm::vec3(-1,1,0);
+    vecMap[glm::vec3(-1,1,1)] = glm::vec3(-1,1,-1);
     }
     else {
-    vecMap[glm::vec3(-1,-1,1)] = glm::vec3(-1,-1,1);
-    vecMap[glm::vec3(-1,0,1)] = glm::vec3(-1,0,-1);
-    vecMap[glm::vec3(-1,1,1)] = glm::vec3(-1,1,1);
-    vecMap[glm::vec3(-1,-1,0)] = glm::vec3(-1,-1,-1);
+    vecMap[glm::vec3(-1,-1,-1)] = glm::vec3(-1,1,-1);
+    vecMap[glm::vec3(-1,0,-1)] = glm::vec3(-1,1,0);
+    vecMap[glm::vec3(-1,1,-1)] = glm::vec3(-1,1,1);
+    vecMap[glm::vec3(-1,-1,0)] = glm::vec3(-1,0,-1);
     vecMap[glm::vec3(-1,0,0)] = glm::vec3(-1,0,0);
-    vecMap[glm::vec3(-1,1,0)] =  glm::vec3(-1,1,-1);
-    vecMap[glm::vec3(-1,-1,-1)] = glm::vec3(-1,-1,0);
-    vecMap[glm::vec3(-1,0,-1)] = glm::vec3(-1,0,1);
-    vecMap[glm::vec3(-1,1,-1)] = glm::vec3(-1,1,0);
+    vecMap[glm::vec3(-1,1,0)] =  glm::vec3(-1,0,1);
+    vecMap[glm::vec3(-1,-1,1)] = glm::vec3(-1,-1,-1);
+    vecMap[glm::vec3(-1,0,1)] = glm::vec3(-1,-1,0);
+    vecMap[glm::vec3(-1,1,1)] = glm::vec3(-1,-1,1);
     }
 
     for (InnerCube* cube : innerCubes) {
         if (cube->GetPosition().x == -1) {
+            glm::vec3 position = cube->GetPosition();
+            cube->UpdatePosition(vecMap[position]);
+        }
+    }
+}
+
+void RubikCube::rotateRight(int direction) {
+std::map<glm::vec3, glm::vec3, RubikCube::Vec3Comparator> vecMap;
+if (direction < 0) {
+    vecMap[glm::vec3(1,-1,-1)] = glm::vec3(1,-1,1);
+    vecMap[glm::vec3(1,0,-1)] = glm::vec3(1,-1,0);
+    vecMap[glm::vec3(1,1,-1)] = glm::vec3(1,-1,-1);
+    vecMap[glm::vec3(1,-1,0)] = glm::vec3(1,0,1);
+    vecMap[glm::vec3(1,0,0)] = glm::vec3(1,0,0);
+    vecMap[glm::vec3(1,1,0)] =  glm::vec3(1,0,-1);
+    vecMap[glm::vec3(1,-1,1)] = glm::vec3(1,1,1);
+    vecMap[glm::vec3(1,0,1)] = glm::vec3(1,1,0);
+    vecMap[glm::vec3(1,1,1)] = glm::vec3(1,1,-1);
+    }
+    else {
+    vecMap[glm::vec3(1,-1,-1)] = glm::vec3(1,1,-1);
+    vecMap[glm::vec3(1,0,-1)] = glm::vec3(1,1,0);
+    vecMap[glm::vec3(1,1,-1)] = glm::vec3(1,1,1);
+    vecMap[glm::vec3(1,-1,0)] = glm::vec3(1,0,-1);
+    vecMap[glm::vec3(1,0,0)] = glm::vec3(1,0,0);
+    vecMap[glm::vec3(1,1,0)] =  glm::vec3(1,0,1);
+    vecMap[glm::vec3(1,-1,1)] = glm::vec3(1,-1,-1);
+    vecMap[glm::vec3(1,0,1)] = glm::vec3(1,-1,0);
+    vecMap[glm::vec3(1,1,1)] = glm::vec3(1,-1,1);
+    }
+
+    for (InnerCube* cube : innerCubes) {
+        if (cube->GetPosition().x == 1) {
+            glm::vec3 position = cube->GetPosition();
+            cube->UpdatePosition(vecMap[position]);
+        }
+    }
+}
+
+void RubikCube::rotateUp(int direction) {
+std::map<glm::vec3, glm::vec3, RubikCube::Vec3Comparator> vecMap;
+if (direction < 0) {
+    vecMap[glm::vec3(-1,1,-1)] = glm::vec3(1,1,-1);
+    vecMap[glm::vec3(0,1,-1)] = glm::vec3(1,1,0);
+    vecMap[glm::vec3(1,1,-1)] = glm::vec3(1,1,1);
+    vecMap[glm::vec3(-1,1,0)] = glm::vec3(0,1,-1);
+    vecMap[glm::vec3(0,1,0)] = glm::vec3(0,1,0);
+    vecMap[glm::vec3(1,1,0)] =  glm::vec3(0,1,1);
+    vecMap[glm::vec3(-1,1,1)] = glm::vec3(-1,1,-1);
+    vecMap[glm::vec3(0,1,1)] = glm::vec3(-1,1,0);
+    vecMap[glm::vec3(1,1,1)] = glm::vec3(-1,1,1);
+    }
+    else {
+    vecMap[glm::vec3(-1,1,-1)] = glm::vec3(-1,1,1);
+    vecMap[glm::vec3(0,1,-1)] = glm::vec3(-1,1,0);
+    vecMap[glm::vec3(1,1,-1)] = glm::vec3(-1,1,-1);
+    vecMap[glm::vec3(-1,1,0)] = glm::vec3(0,1,1);
+    vecMap[glm::vec3(0,1,0)] = glm::vec3(0,1,0);
+    vecMap[glm::vec3(1,1,0)] =  glm::vec3(0,1,-1);
+    vecMap[glm::vec3(-1,1,1)] = glm::vec3(1,1,1);
+    vecMap[glm::vec3(0,1,1)] = glm::vec3(1,1,0);
+    vecMap[glm::vec3(1,1,1)] = glm::vec3(1,1,-1);    
+    }
+    for (InnerCube* cube : innerCubes) {
+        if (cube->GetPosition().y == 1) {
+            glm::vec3 position = cube->GetPosition();
+            cube->UpdatePosition(vecMap[position]);
+        }
+    }
+}
+
+
+void RubikCube::rotateDown(int direction) {
+std::map<glm::vec3, glm::vec3, RubikCube::Vec3Comparator> vecMap;
+if (direction < 0) {
+    vecMap[glm::vec3(-1,-1,-1)] = glm::vec3(1,-1,-1);
+    vecMap[glm::vec3(0,-1,-1)] = glm::vec3(1,-1,0);
+    vecMap[glm::vec3(1,-1,-1)] = glm::vec3(1,-1,1);
+    vecMap[glm::vec3(-1,-1,0)] = glm::vec3(0,-1,-1);
+    vecMap[glm::vec3(0,-1,0)] = glm::vec3(0,-1,0);
+    vecMap[glm::vec3(1,-1,0)] =  glm::vec3(0,-1,1);
+    vecMap[glm::vec3(-1,-1,1)] = glm::vec3(-1,-1,-1);
+    vecMap[glm::vec3(0,-1,1)] = glm::vec3(-1,-1,0);
+    vecMap[glm::vec3(1,-1,1)] = glm::vec3(-1,-1,1);
+    }
+    else {
+    vecMap[glm::vec3(-1,-1,-1)] = glm::vec3(-1,-1,1);
+    vecMap[glm::vec3(0,-1,-1)] = glm::vec3(-1,-1,0);
+    vecMap[glm::vec3(1,-1,-1)] = glm::vec3(-1,-1,-1);
+    vecMap[glm::vec3(-1,-1,0)] = glm::vec3(0,-1,1);
+    vecMap[glm::vec3(0,-1,0)] = glm::vec3(0,-1,0);
+    vecMap[glm::vec3(1,-1,0)] =  glm::vec3(0,-1,-1);
+    vecMap[glm::vec3(-1,-1,1)] = glm::vec3(1,-1,1);
+    vecMap[glm::vec3(0,-1,1)] = glm::vec3(1,-1,0);
+    vecMap[glm::vec3(1,-1,1)] = glm::vec3(1,-1,-1);    
+    }
+    for (InnerCube* cube : innerCubes) {
+        if (cube->GetPosition().y == -1) {
             glm::vec3 position = cube->GetPosition();
             cube->UpdatePosition(vecMap[position]);
         }

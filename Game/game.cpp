@@ -103,7 +103,8 @@ void Game::rotateFront()
 	for (InnerCube* cube : innerCubes){
 		if (cube->GetPosition().z == 1){
 			int index = cube->GetIndex();
-			std::cout << "index front: " << index << std::endl;
+			glm::vec3 pos = cube->GetPosition();
+			std::cout << "index front: " << index << "position: " << pos.x << " " << pos.y << " " << pos.z << std::endl;
 			glm::mat4 rot = shapes[index]->getRot();
 			glm::mat4 rotTransposed = glm::transpose(rot);
 			glm::vec3 vector = glm::vec3(0, 0, 1);
@@ -139,7 +140,8 @@ void Game::rotateRight()
 	for (InnerCube* cube : innerCubes){
 		if (cube->GetPosition().x == 1){
 			int index = cube->GetIndex();
-			std::cout << "index Right: " << index << std::endl;
+			glm::vec3 pos = cube->GetPosition();
+			std::cout << "index Right: " << index << "position: " << pos.x << " " << pos.y << " " << pos.z << std::endl;
 			glm::mat4 rot = shapes[index]->getRot();
 			glm::mat4 rotTransposed = glm::transpose(rot);
 			glm::vec3 vector = glm::vec3(1, 0, 0);
@@ -147,8 +149,17 @@ void Game::rotateRight()
 			shapes[index]->MyRotate(direction*angle, rotatedVector, 0);
 		}
 	}
-		
-		rubikCube->printCubes();
+		rubikCube->rotateRight(direction);
+		std::cout << "after right rotation" << std::endl;
+			for (InnerCube* cube : innerCubes){
+		if (cube->GetPosition().x == 1){
+			int index = cube->GetIndex();
+			glm::vec3 pos = cube->GetPosition();
+			std::cout << "index Right: " << index << "position: " << pos.x << " " << pos.y << " " << pos.z << std::endl;
+
+		}
+	}
+		// rubikCube->printCubes();
 }
 
 void Game::rotateLeft()
@@ -157,7 +168,7 @@ void Game::rotateLeft()
 	for (InnerCube* cube : innerCubes){
 		if (cube->GetPosition().x == -1){
 			int index = cube->GetIndex();
-			std::cout << "index: " << index << std::endl;
+			std::cout << "indexLEFT: " << index << std::endl;
 			glm::mat4 rot = shapes[index]->getRot();
 			glm::mat4 rotTransposed = glm::transpose(rot);
 			glm::vec3 vector = glm::vec3(1, 0, 0);
@@ -183,7 +194,8 @@ void Game::rotateUp()
 			shapes[index]->MyRotate(direction*angle, rotatedVector, 0);
 		}
 	}
-		rubikCube->printCubes();
+	rubikCube->rotateUp(direction);
+	rubikCube->printCubes();
 }
 
 void Game::rotateDown()
@@ -197,9 +209,10 @@ void Game::rotateDown()
 			glm::mat4 rotTransposed = glm::transpose(rot);
 			glm::vec3 vector = glm::vec3(0, 1, 0);
 			glm::vec3 rotatedVector = glm::vec3(rotTransposed * glm::vec4(vector, 1));
-			shapes[index]->MyRotate(direction*angle, glm::vec3(0, 1, 0), 0);
+			shapes[index]->MyRotate(direction*angle, rotatedVector, 0);
 		}
 	}
-		rubikCube->printCubes();
+	rubikCube->rotateDown(direction);
+	rubikCube->printCubes();
 }
 
