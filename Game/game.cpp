@@ -98,6 +98,8 @@ void Game::changeDirection()
 
 void Game::rotateFront()
 {
+	if(!validateMove(FRONT)) return;
+
 	std::vector<InnerCube *> innerCubes = rubikCube->GetInnerCubes();
 	std::vector<InnerCube *> rotatedCubes = std::vector<InnerCube *>();
 	for (InnerCube* cube : innerCubes){
@@ -109,15 +111,23 @@ void Game::rotateFront()
 			glm::mat4 rotTransposed = glm::transpose(rot);
 			glm::vec3 vector = glm::vec3(0, 0, 1);
 			glm::vec3 rotatedVector = glm::vec3(rotTransposed * glm::vec4(vector, 1));
-			shapes[index]->MyRotate(direction*angle, rotatedVector, 0);
+			frontAngle += RotationAngle*direction;
+			shapes[index]->MyRotate(direction*RotationAngle, rotatedVector, 0);
 		}
 	}
-	rubikCube->rotateFront(direction);
-	rubikCube->printCubes();
+	if(fmod(frontAngle,90.0) == 0){
+		int rotationTimes = frontAngle / 90;
+		frontAngle = 0.0;
+		for (int i = 0; i < rotationTimes; i++){
+			rubikCube->rotateFront(direction);
+		}
+	}
 }
 
 void Game::rotateBack()
 {
+	if (!validateMove(BACK)) return;
+
 	std::vector<InnerCube *> innerCubes = rubikCube->GetInnerCubes();
 	for (InnerCube* cube : innerCubes){
 		if (cube->GetPosition().z == -1){
@@ -127,15 +137,25 @@ void Game::rotateBack()
 			glm::mat4 rotTransposed = glm::transpose(rot);
 			glm::vec3 vector = glm::vec3(0, 0, 1);
 			glm::vec3 rotatedVector = glm::vec3(rotTransposed * glm::vec4(vector, 1));
-			shapes[index]->MyRotate(direction*angle, rotatedVector, 0);
+			backAngle += RotationAngle*direction;
+			shapes[index]->MyRotate(direction*RotationAngle, rotatedVector, 0);
 		}
 	}
-		rubikCube->rotateBack(direction);
+		if(fmod(backAngle,90.0) == 0){
+			int rotationTimes = backAngle / 90;
+			std::cout << "backAngle: " << backAngle << std::endl;
+			backAngle = 0.0;
+			for (int i = 0; i < rotationTimes; i++){
+				rubikCube->rotateBack(direction);
+			}
+		}
 		rubikCube->printCubes();
 }
 
 void Game::rotateRight()
 {
+	if (!validateMove(RIGHT)) return;
+
 	std::vector<InnerCube *> innerCubes = rubikCube->GetInnerCubes();
 	for (InnerCube* cube : innerCubes){
 		if (cube->GetPosition().x == 1){
@@ -146,24 +166,24 @@ void Game::rotateRight()
 			glm::mat4 rotTransposed = glm::transpose(rot);
 			glm::vec3 vector = glm::vec3(1, 0, 0);
 			glm::vec3 rotatedVector = glm::vec3(rotTransposed * glm::vec4(vector, 1));
-			shapes[index]->MyRotate(direction*angle, rotatedVector, 0);
+			rightAngle += RotationAngle*direction;
+			shapes[index]->MyRotate(direction*RotationAngle, rotatedVector, 0);
 		}
 	}
-		rubikCube->rotateRight(direction);
-		std::cout << "after right rotation" << std::endl;
-			for (InnerCube* cube : innerCubes){
-		if (cube->GetPosition().x == 1){
-			int index = cube->GetIndex();
-			glm::vec3 pos = cube->GetPosition();
-			std::cout << "index Right: " << index << "position: " << pos.x << " " << pos.y << " " << pos.z << std::endl;
-
+		if(fmod(rightAngle,90.0) == 0){
+			int rotationTimes = rightAngle / 90;
+			std::cout << "rightAngle: " << rightAngle << std::endl;
+			rightAngle = 0.0;
+			for (int i = 0; i < rotationTimes; i++){
+				rubikCube->rotateRight(direction);
+			}
 		}
-	}
-		// rubikCube->printCubes();
 }
 
 void Game::rotateLeft()
 {
+	if (!validateMove(LEFT)) return;
+
 	std::vector<InnerCube *> innerCubes = rubikCube->GetInnerCubes();
 	for (InnerCube* cube : innerCubes){
 		if (cube->GetPosition().x == -1){
@@ -173,15 +193,26 @@ void Game::rotateLeft()
 			glm::mat4 rotTransposed = glm::transpose(rot);
 			glm::vec3 vector = glm::vec3(1, 0, 0);
 			glm::vec3 rotatedVector = glm::vec3(rotTransposed * glm::vec4(vector, 1));
-			shapes[index]->MyRotate(direction*angle,rotatedVector, 0);
+			leftAngle += RotationAngle*direction;
+			shapes[index]->MyRotate(direction*RotationAngle,rotatedVector, 0);
 		}
 	}
-		rubikCube->rotateLeft(direction);
-		rubikCube->printCubes();
+		if(fmod(leftAngle,90.0) == 0){
+			int rotationTimes = leftAngle / 90;
+
+			std::cout << "leftAngle: " << leftAngle << std::endl;
+			leftAngle = 0.0;
+			for (int i = 0; i < rotationTimes; i++){
+				rubikCube->rotateLeft(direction);
+			}
+		}
+		
 }
 
 void Game::rotateUp()
 {
+	if (!validateMove(UP)) return;
+
 	std::vector<InnerCube *> innerCubes = rubikCube->GetInnerCubes();
 	for (InnerCube* cube : innerCubes){
 		if (cube->GetPosition().y == 1){
@@ -191,15 +222,25 @@ void Game::rotateUp()
 			glm::mat4 rotTransposed = glm::transpose(rot);
 			glm::vec3 vector = glm::vec3(0, 1, 0);
 			glm::vec3 rotatedVector = glm::vec3(rotTransposed * glm::vec4(vector, 1));
-			shapes[index]->MyRotate(direction*angle, rotatedVector, 0);
+			upAngle += RotationAngle*direction;
+			shapes[index]->MyRotate(direction*RotationAngle, rotatedVector, 0);
 		}
 	}
-	rubikCube->rotateUp(direction);
+	if (fmod(upAngle, 90.0) == 0){
+		std::cout << "upAngle: " << upAngle << std::endl;
+		int rotationTimes = upAngle / 90;
+		upAngle = 0.0;
+		for (int i = 0; i < rotationTimes; i++){
+			rubikCube->rotateUp(direction);
+		}
+	}
 	rubikCube->printCubes();
 }
 
 void Game::rotateDown()
 {
+	if (!validateMove(DOWN)) return;
+
 	std::vector<InnerCube *> innerCubes = rubikCube->GetInnerCubes();
 	for (InnerCube* cube : innerCubes){
 		if (cube->GetPosition().y == -1){
@@ -209,10 +250,46 @@ void Game::rotateDown()
 			glm::mat4 rotTransposed = glm::transpose(rot);
 			glm::vec3 vector = glm::vec3(0, 1, 0);
 			glm::vec3 rotatedVector = glm::vec3(rotTransposed * glm::vec4(vector, 1));
-			shapes[index]->MyRotate(direction*angle, rotatedVector, 0);
+			downAngle += RotationAngle*direction;
+			shapes[index]->MyRotate(direction*RotationAngle, rotatedVector, 0);
 		}
 	}
-	rubikCube->rotateDown(direction);
+	if (fmod(downAngle, 90.0) == 0){
+		std::cout << "downAngle: " << downAngle << std::endl;
+		int rotationTimes = downAngle / 90;
+		downAngle = 0.0;
+		for (int i = 0; i < rotationTimes; i++){
+			rubikCube->rotateDown(direction);
+		}
+	}
 	rubikCube->printCubes();
 }
 
+void Game::multiplyAngle(float factor)
+{
+	RotationAngle *= factor;
+}
+
+bool Game::validateMove(Direction expression){
+	switch (expression)
+	{
+	case FRONT:
+		return rightAngle == 0 && leftAngle == 0 && upAngle == 0 && downAngle == 0;
+		break;
+	case BACK:
+		return rightAngle == 0 && leftAngle == 0 && upAngle == 0 && downAngle == 0;
+		break;
+	case LEFT:
+		return frontAngle == 0 && backAngle == 0 && upAngle == 0 && downAngle == 0;
+		break;
+	case RIGHT:
+		return frontAngle == 0 && backAngle == 0 && upAngle == 0 && downAngle == 0;
+		break;
+	case UP:
+		return frontAngle == 0 && backAngle == 0 && rightAngle == 0 && leftAngle == 0;
+		break;
+	case DOWN:
+		return frontAngle == 0 && backAngle == 0 && rightAngle == 0 && leftAngle == 0;
+		break;
+	}
+}

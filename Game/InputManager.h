@@ -68,6 +68,12 @@
 				case GLFW_KEY_C:
 					scn->changeDirection();
 					break;
+				case GLFW_KEY_Q:
+					scn->multiplyAngle(2.0f);
+					break;
+				case GLFW_KEY_W:
+					scn->multiplyAngle(0.5f);
+					break;
 
 			default:
 				break;
