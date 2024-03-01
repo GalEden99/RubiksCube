@@ -19,6 +19,7 @@ public:
 	void rotateRight();
 	void rotateUp();
 	void rotateDown();
+	void changeDirection();
 	~Game(void);
 
 	int direction = 1;

@@ -65,6 +65,9 @@
 				case GLFW_KEY_D:
 					scn->rotateDown();
 					break;
+				case GLFW_KEY_C:
+					scn->changeDirection();
+					break;
 
 			default:
 				break;

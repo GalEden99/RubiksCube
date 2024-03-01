@@ -51,3 +51,8 @@ void MovableGLM::ZeroTrans()
 	rot = glm::mat4(1);
 	scl = glm::mat4(1);
 }
+
+glm::mat4 MovableGLM::getRot() const
+{
+	return rot;
+}
