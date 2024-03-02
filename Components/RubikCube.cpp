@@ -65,7 +65,6 @@ std::map<glm::vec3, glm::vec3, RubikCube::Vec3Comparator> vecMap;
     vecMap[glm::vec3(-1,0,1)] = glm::vec3(0,-1,1);
     vecMap[glm::vec3(-1,1,1)] = glm::vec3(-1,-1,1);
     }
-    std::cout << "Did front rotation to the " << direction << std::endl;
 
     for (InnerCube* cube : innerCubes) {
         if (cube->GetPosition().z == 1) {
@@ -99,9 +98,6 @@ std::map<glm::vec3, glm::vec3, RubikCube::Vec3Comparator> vecMap;
     vecMap[glm::vec3(-1,0,-1)] = glm::vec3(0,-1,-1);
     vecMap[glm::vec3(-1,1,-1)] = glm::vec3(-1,-1,-1);
     }
-
-    std::cout << "Did back rotation to the " << direction << std::endl;
-
 
     // Update positions of the cubes on the front side
     for (InnerCube* cube : innerCubes) {
@@ -137,7 +133,6 @@ if (direction < 0) {
     vecMap[glm::vec3(-1,1,1)] = glm::vec3(-1,-1,1);
     }
 
-    std::cout << "Did back rotation to the " << direction << std::endl;
 
 
     for (InnerCube* cube : innerCubes) {
@@ -173,7 +168,6 @@ if (direction < 0) {
     vecMap[glm::vec3(1,1,1)] = glm::vec3(1,-1,1);
     }
 
-    std::cout << "Did right rotation to the " << direction << std::endl;
 
 
     for (InnerCube* cube : innerCubes) {

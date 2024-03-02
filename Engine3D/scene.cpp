@@ -198,7 +198,6 @@
 
 				MyTranslate(glm::vec3(-xrel/20.0f,0,0),0);
 				MyTranslate(glm::vec3(0,yrel/20.0f,0),0);
-				// MyTranslate(glm::vec3(xrel,yrel,0),0);				
 
 				WhenTranslate();
 			}

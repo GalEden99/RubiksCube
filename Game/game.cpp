@@ -111,12 +111,13 @@ void Game::rotateFront()
 			glm::mat4 rotTransposed = glm::transpose(rot);
 			glm::vec3 vector = glm::vec3(0, 0, 1);
 			glm::vec3 rotatedVector = glm::vec3(rotTransposed * glm::vec4(vector, 1));
-			frontAngle += RotationAngle*direction;
+			
 			shapes[index]->MyRotate(direction*RotationAngle, rotatedVector, 0);
 		}
 	}
-	if(fmod(frontAngle,90.0) == 0){
-		int rotationTimes = frontAngle / 90;
+	frontAngle += RotationAngle*direction;
+	if(abs(fmod(frontAngle,90.0)) == 0){
+		int rotationTimes = abs(frontAngle / 90);
 		frontAngle = 0.0;
 		for (int i = 0; i < rotationTimes; i++){
 			rubikCube->rotateFront(direction);
@@ -137,18 +138,18 @@ void Game::rotateBack()
 			glm::mat4 rotTransposed = glm::transpose(rot);
 			glm::vec3 vector = glm::vec3(0, 0, 1);
 			glm::vec3 rotatedVector = glm::vec3(rotTransposed * glm::vec4(vector, 1));
-			backAngle += RotationAngle*direction;
+			
 			shapes[index]->MyRotate(direction*RotationAngle, rotatedVector, 0);
 		}
 	}
-		if(fmod(backAngle,90.0) == 0){
-			int rotationTimes = backAngle / 90;
-			std::cout << "backAngle: " << backAngle << std::endl;
-			backAngle = 0.0;
-			for (int i = 0; i < rotationTimes; i++){
-				rubikCube->rotateBack(direction);
-			}
+	backAngle += RotationAngle*direction;
+	if(abs(fmod(backAngle,90.0)) == 0){
+		int rotationTimes = abs(backAngle / 90);
+		backAngle = 0.0;
+		for (int i = 0; i < rotationTimes; i++){
+			rubikCube->rotateBack(direction);
 		}
+	}
 		rubikCube->printCubes();
 }
 
@@ -161,18 +162,17 @@ void Game::rotateRight()
 		if (cube->GetPosition().x == 1){
 			int index = cube->GetIndex();
 			glm::vec3 pos = cube->GetPosition();
-			std::cout << "index Right: " << index << "position: " << pos.x << " " << pos.y << " " << pos.z << std::endl;
 			glm::mat4 rot = shapes[index]->getRot();
 			glm::mat4 rotTransposed = glm::transpose(rot);
 			glm::vec3 vector = glm::vec3(1, 0, 0);
 			glm::vec3 rotatedVector = glm::vec3(rotTransposed * glm::vec4(vector, 1));
-			rightAngle += RotationAngle*direction;
+			
 			shapes[index]->MyRotate(direction*RotationAngle, rotatedVector, 0);
 		}
 	}
-		if(fmod(rightAngle,90.0) == 0){
-			int rotationTimes = rightAngle / 90;
-			std::cout << "rightAngle: " << rightAngle << std::endl;
+	rightAngle += RotationAngle*direction;
+		if(abs(fmod(rightAngle,90.0)) == 0){
+			int rotationTimes = abs(rightAngle / 90);
 			rightAngle = 0.0;
 			for (int i = 0; i < rotationTimes; i++){
 				rubikCube->rotateRight(direction);
@@ -188,19 +188,18 @@ void Game::rotateLeft()
 	for (InnerCube* cube : innerCubes){
 		if (cube->GetPosition().x == -1){
 			int index = cube->GetIndex();
-			std::cout << "indexLEFT: " << index << std::endl;
 			glm::mat4 rot = shapes[index]->getRot();
 			glm::mat4 rotTransposed = glm::transpose(rot);
 			glm::vec3 vector = glm::vec3(1, 0, 0);
 			glm::vec3 rotatedVector = glm::vec3(rotTransposed * glm::vec4(vector, 1));
-			leftAngle += RotationAngle*direction;
+			
 			shapes[index]->MyRotate(direction*RotationAngle,rotatedVector, 0);
 		}
 	}
-		if(fmod(leftAngle,90.0) == 0){
-			int rotationTimes = leftAngle / 90;
+	leftAngle += RotationAngle*direction;
+		if(abs(fmod(leftAngle,90.0)) == 0){
+			int rotationTimes = abs(leftAngle / 90);
 
-			std::cout << "leftAngle: " << leftAngle << std::endl;
 			leftAngle = 0.0;
 			for (int i = 0; i < rotationTimes; i++){
 				rubikCube->rotateLeft(direction);
@@ -217,17 +216,16 @@ void Game::rotateUp()
 	for (InnerCube* cube : innerCubes){
 		if (cube->GetPosition().y == 1){
 			int index = cube->GetIndex();
-			std::cout << "index: " << index << std::endl;
 			glm::mat4 rot = shapes[index]->getRot();
 			glm::mat4 rotTransposed = glm::transpose(rot);
 			glm::vec3 vector = glm::vec3(0, 1, 0);
 			glm::vec3 rotatedVector = glm::vec3(rotTransposed * glm::vec4(vector, 1));
-			upAngle += RotationAngle*direction;
+			
 			shapes[index]->MyRotate(direction*RotationAngle, rotatedVector, 0);
 		}
 	}
+	upAngle += RotationAngle*direction;
 	if (fmod(upAngle, 90.0) == 0){
-		std::cout << "upAngle: " << upAngle << std::endl;
 		int rotationTimes = upAngle / 90;
 		upAngle = 0.0;
 		for (int i = 0; i < rotationTimes; i++){
@@ -250,10 +248,11 @@ void Game::rotateDown()
 			glm::mat4 rotTransposed = glm::transpose(rot);
 			glm::vec3 vector = glm::vec3(0, 1, 0);
 			glm::vec3 rotatedVector = glm::vec3(rotTransposed * glm::vec4(vector, 1));
-			downAngle += RotationAngle*direction;
+			
 			shapes[index]->MyRotate(direction*RotationAngle, rotatedVector, 0);
 		}
 	}
+	downAngle += RotationAngle*direction;
 	if (fmod(downAngle, 90.0) == 0){
 		std::cout << "downAngle: " << downAngle << std::endl;
 		int rotationTimes = downAngle / 90;
