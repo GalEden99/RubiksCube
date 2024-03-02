@@ -181,6 +181,7 @@ if (direction < 0) {
 void RubikCube::rotateUp(int direction) {
 std::map<glm::vec3, glm::vec3, RubikCube::Vec3Comparator> vecMap;
 if (direction < 0) {
+    std::cout << "up direction" << direction << std::endl;
     vecMap[glm::vec3(-1,1,-1)] = glm::vec3(1,1,-1);
     vecMap[glm::vec3(0,1,-1)] = glm::vec3(1,1,0);
     vecMap[glm::vec3(1,1,-1)] = glm::vec3(1,1,1);
@@ -192,6 +193,7 @@ if (direction < 0) {
     vecMap[glm::vec3(1,1,1)] = glm::vec3(-1,1,1);
     }
     else {
+    std::cout << "up direction" << direction << std::endl;
     vecMap[glm::vec3(-1,1,-1)] = glm::vec3(-1,1,1);
     vecMap[glm::vec3(0,1,-1)] = glm::vec3(-1,1,0);
     vecMap[glm::vec3(1,1,-1)] = glm::vec3(-1,1,-1);

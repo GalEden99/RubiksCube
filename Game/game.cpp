@@ -225,8 +225,8 @@ void Game::rotateUp()
 		}
 	}
 	upAngle += RotationAngle*direction;
-	if (fmod(upAngle, 90.0) == 0){
-		int rotationTimes = upAngle / 90;
+	if (abs(fmod(upAngle, 90.0)) == 0){
+		int rotationTimes = abs(upAngle / 90);
 		upAngle = 0.0;
 		for (int i = 0; i < rotationTimes; i++){
 			rubikCube->rotateUp(direction);
@@ -253,9 +253,9 @@ void Game::rotateDown()
 		}
 	}
 	downAngle += RotationAngle*direction;
-	if (fmod(downAngle, 90.0) == 0){
+	if (abs(fmod(downAngle, 90.0)) == 0){
 		std::cout << "downAngle: " << downAngle << std::endl;
-		int rotationTimes = downAngle / 90;
+		int rotationTimes = abs(downAngle / 90);
 		downAngle = 0.0;
 		for (int i = 0; i < rotationTimes; i++){
 			rubikCube->rotateDown(direction);
