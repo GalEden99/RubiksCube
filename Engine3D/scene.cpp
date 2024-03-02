@@ -90,7 +90,7 @@
 		if(toClear)
 		{
 			if(shaderIndx>0)
-				Clear(1,0,1,1);
+				Clear(1,1,1,1);
 			else
 				Clear(0,0,0,0);
 		}
@@ -195,17 +195,18 @@
 		{
 			if(button == 1 )
 			{				
-
-				MyTranslate(glm::vec3(-xrel/20.0f,0,0),0);
-				MyTranslate(glm::vec3(0,yrel/20.0f,0),0);
-
-				WhenTranslate();
+				std::cout<<"MouseProccessing: button pressed is Right"<<std::endl;
+				float sensitivity = 0.009f;
+				MoveCamera(cameraIndx, xTranslate, -xrel*sensitivity);
+				MoveCamera(cameraIndx, yTranslate, yrel*sensitivity);
 			}
 			else
 			{
-				MyRotate(xrel/2.0f,glm::vec3(1,0,0),0);
-				MyRotate(yrel/2.0f,glm::vec3(0,0,1),0);
-				WhenRotate();
+				std::cout<<"MouseProccessing: button pressed is Left"<<std::endl;
+				float sensitivity = 0.25f;
+				glm::mat3 transRot = glm::transpose(glm::mat3(getRot()));
+				MyRotate(-xrel*sensitivity, transRot*glm::vec3(0, 1, 0), 0);
+				MyRotate(-yrel*sensitivity, transRot*glm::vec3(1, 0, 0), 0);
 			}
 		}
 	}

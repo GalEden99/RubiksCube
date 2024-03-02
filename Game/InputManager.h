@@ -16,9 +16,9 @@
 	
 	void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 	{
+		float sensitivity = 0.5f;
 		Game *scn = (Game*)glfwGetWindowUserPointer(window);
-		scn->MyTranslate(glm::vec3(0,0,xoffset),0);
-		
+		scn->MoveCamera(0, scn->zTranslate, yoffset*sensitivity);
 	}
 	
 	void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -33,12 +33,16 @@
 					glfwSetWindowShouldClose(window,GLFW_TRUE);
 				break;
 				case GLFW_KEY_UP:
-					scn->MoveCamera(0,scn->zTranslate,0.4f);
+					scn->MyRotate(15 ,glm::vec3(1,0,0),0);
 					break;
 				case GLFW_KEY_DOWN:
-					//scn->shapeTransformation(scn->xGlobalRotate,-5.f);
-					//cout<< "down: "<<endl;
-					scn->MoveCamera(0,scn->zTranslate,-0.4f);
+					scn->MyRotate(-15 ,glm::vec3(1,0,0),0);
+					break;
+				case GLFW_KEY_RIGHT:
+					scn->MyRotate(15 ,glm::vec3(0,1,0),0);
+					break;
+				case GLFW_KEY_LEFT:
+					scn->MyRotate(-15 ,glm::vec3(0,1,0),0);
 					break;
 				case GLFW_KEY_F:
 					scn->rotateFront();
@@ -87,8 +91,8 @@
 		{
 			scn->MouseProccessing(GLFW_MOUSE_BUTTON_LEFT);
 		}
-
 	}
+
 
 	void window_size_callback(GLFWwindow* window, int width, int height)
 	{

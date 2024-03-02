@@ -266,8 +266,9 @@ void Game::rotateDown()
 
 void Game::multiplyAngle(float factor)
 {
-	if (RotationAngle >=180) return;
+	if (RotationAngle*factor >180) return;
 	RotationAngle *= factor;
+	std::cout << "Rotation angle is now: " << RotationAngle << std::endl;
 } 
 
 bool Game::validateMove(Direction expression){
