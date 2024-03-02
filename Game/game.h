@@ -28,7 +28,7 @@ public:
 	~Game(void);
 
 
-	int direction = 1;
+	int direction = -1;
 	float RotationAngle = 90.0f;
 	float frontAngle = 0.0f;
 	float backAngle = 0.0f;

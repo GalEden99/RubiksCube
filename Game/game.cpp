@@ -266,8 +266,9 @@ void Game::rotateDown()
 
 void Game::multiplyAngle(float factor)
 {
+	if (RotationAngle >=180) return;
 	RotationAngle *= factor;
-}
+} 
 
 bool Game::validateMove(Direction expression){
 	switch (expression)

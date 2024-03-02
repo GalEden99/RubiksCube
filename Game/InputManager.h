@@ -32,13 +32,6 @@
 				case GLFW_KEY_ESCAPE:			
 					glfwSetWindowShouldClose(window,GLFW_TRUE);
 				break;
-				case GLFW_KEY_SPACE:
-					if(scn->IsActive())
-						scn->Deactivate();
-					else
-						scn->Activate();
-				break;
-
 				case GLFW_KEY_UP:
 					scn->MoveCamera(0,scn->zTranslate,0.4f);
 					break;
@@ -65,13 +58,13 @@
 				case GLFW_KEY_D:
 					scn->rotateDown();
 					break;
-				case GLFW_KEY_C:
+				case GLFW_KEY_SPACE:
 					scn->changeDirection();
 					break;
-				case GLFW_KEY_Q:
+				case GLFW_KEY_A:
 					scn->multiplyAngle(2.0f);
 					break;
-				case GLFW_KEY_W:
+				case GLFW_KEY_Z:
 					scn->multiplyAngle(0.5f);
 					break;
 
