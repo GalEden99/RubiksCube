@@ -1,6 +1,7 @@
 #pragma once   //maybe should be static class
 #include "display.h"
 #include "game.h"
+#include <iostream>
 
 
 	void mouse_callback(GLFWwindow* window,int button, int action, int mods)
@@ -45,30 +46,39 @@
 					scn->MyRotate(-15 ,glm::vec3(0,1,0),0);
 					break;
 				case GLFW_KEY_F:
+					std::cout << "F key was pressed" << std::endl;
 					scn->rotateFront();
 					break;
 				case GLFW_KEY_B:
+					std::cout << "B key was pressed" << std::endl;
 					scn->rotateBack();
 					break;
 				case GLFW_KEY_L:
+					std::cout << "L key was pressed" << std::endl;
 					scn->rotateLeft();
 					break;
 				case GLFW_KEY_R:
+					std::cout << "R key was pressed" << std::endl;
 					scn->rotateRight();
 					break;				
-				case GLFW_KEY_U:
+				case GLFW_KEY_U:					
+					std::cout << "U key was pressed" << std::endl;
 					scn->rotateUp();
 					break;
 				case GLFW_KEY_D:
+					std::cout << "D key was pressed" << std::endl;
 					scn->rotateDown();
 					break;
 				case GLFW_KEY_SPACE:
+					std::cout << "Space key was pressed" << std::endl;
 					scn->changeDirection();
 					break;
 				case GLFW_KEY_A:
+					std::cout << "A key was pressed (multiply angle by 2)" << std::endl;
 					scn->multiplyAngle(2.0f);
 					break;
 				case GLFW_KEY_Z:
+					std::cout << "Z key was pressed (divide angle by 2)" << std::endl;
 					scn->multiplyAngle(0.5f);
 					break;
 

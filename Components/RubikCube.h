@@ -7,9 +7,11 @@
 class RubikCube {
     private:
         std::vector<InnerCube *> innerCubes;
+        int size;
+        float distance;
 
     public:
-        RubikCube();
+        RubikCube(int size, float distance);
         void AddInnerCube(InnerCube* innerCube);
         void UpdateInnerCubePosition(int index, glm::vec3 position);
         InnerCube* GetInnerCube(int index);

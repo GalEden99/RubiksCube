@@ -25,7 +25,7 @@
 		xold = 0;
 		yold = 0;
 		isActive = false;
-		rubikCube = new RubikCube();
+		rubikCube = new RubikCube(size, distance);
 	}
 
 	Scene::Scene(float angle,float relationWH,float near1, float far1)
@@ -38,7 +38,7 @@
 		xold = 0;
 		yold = 0;
 		isActive = false;
-		rubikCube = new RubikCube();
+		rubikCube = new RubikCube(size, distance);
 	}
 
 	void Scene::AddShapeFromFile(const std::string& fileName,int parent,unsigned int mode)
@@ -195,14 +195,12 @@
 		{
 			if(button == 1 )
 			{				
-				std::cout<<"MouseProccessing: button pressed is Right"<<std::endl;
 				float sensitivity = 0.009f;
 				MoveCamera(cameraIndx, xTranslate, -xrel*sensitivity);
 				MoveCamera(cameraIndx, yTranslate, yrel*sensitivity);
 			}
 			else
 			{
-				std::cout<<"MouseProccessing: button pressed is Left"<<std::endl;
 				float sensitivity = 0.25f;
 				glm::mat3 transRot = glm::transpose(glm::mat3(getRot()));
 				MyRotate(-xrel*sensitivity, transRot*glm::vec3(0, 1, 0), 0);

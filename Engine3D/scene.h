@@ -77,6 +77,8 @@ private:
 
 protected:
 	RubikCube* rubikCube;
+	int size = 3;
+	float distance = (size-1) / 2.0f;
 	std::vector<Shape*> shapes;
 	std::vector<Shader*> shaders;
 	std::vector<int> chainParents;

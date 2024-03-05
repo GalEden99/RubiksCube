@@ -28,9 +28,8 @@ void Game::Init()
 	AddShader("../res/shaders/basicShader");
 	
 	AddTexture("../res/textures/plane.png", false);
-	int size = 3;
-	float distance = 1;
 	int index = 0;
+	std::cout << "\tsize: " << size << " | distance: " << distance << std::endl;
 	for (float i = -distance; i <= distance; i += 1){
 		for (float j = -distance; j <= distance; j += 1){
 			for (float k = -distance; k <= distance; k += 1){
@@ -103,10 +102,9 @@ void Game::rotateFront()
 	std::vector<InnerCube *> innerCubes = rubikCube->GetInnerCubes();
 	std::vector<InnerCube *> rotatedCubes = std::vector<InnerCube *>();
 	for (InnerCube* cube : innerCubes){
-		if (cube->GetPosition().z == 1){
+		if (cube->GetPosition().z == distance){
 			int index = cube->GetIndex();
 			glm::vec3 pos = cube->GetPosition();
-			std::cout << "index front: " << index << "position: " << pos.x << " " << pos.y << " " << pos.z << std::endl;
 			glm::mat4 rot = shapes[index]->getRot();
 			glm::mat4 rotTransposed = glm::transpose(rot);
 			glm::vec3 vector = glm::vec3(0, 0, 1);
@@ -131,9 +129,8 @@ void Game::rotateBack()
 
 	std::vector<InnerCube *> innerCubes = rubikCube->GetInnerCubes();
 	for (InnerCube* cube : innerCubes){
-		if (cube->GetPosition().z == -1){
+		if (cube->GetPosition().z == -distance){
 			int index = cube->GetIndex();
-			std::cout << "index: " << index << std::endl;
 			glm::mat4 rot = shapes[index]->getRot();
 			glm::mat4 rotTransposed = glm::transpose(rot);
 			glm::vec3 vector = glm::vec3(0, 0, 1);
@@ -150,7 +147,7 @@ void Game::rotateBack()
 			rubikCube->rotateBack(direction);
 		}
 	}
-		rubikCube->printCubes();
+		// rubikCube->printCubes();
 }
 
 void Game::rotateRight()
@@ -159,7 +156,7 @@ void Game::rotateRight()
 
 	std::vector<InnerCube *> innerCubes = rubikCube->GetInnerCubes();
 	for (InnerCube* cube : innerCubes){
-		if (cube->GetPosition().x == 1){
+		if (cube->GetPosition().x == distance){
 			int index = cube->GetIndex();
 			glm::vec3 pos = cube->GetPosition();
 			glm::mat4 rot = shapes[index]->getRot();
@@ -186,7 +183,7 @@ void Game::rotateLeft()
 
 	std::vector<InnerCube *> innerCubes = rubikCube->GetInnerCubes();
 	for (InnerCube* cube : innerCubes){
-		if (cube->GetPosition().x == -1){
+		if (cube->GetPosition().x == -distance){
 			int index = cube->GetIndex();
 			glm::mat4 rot = shapes[index]->getRot();
 			glm::mat4 rotTransposed = glm::transpose(rot);
@@ -214,7 +211,7 @@ void Game::rotateUp()
 
 	std::vector<InnerCube *> innerCubes = rubikCube->GetInnerCubes();
 	for (InnerCube* cube : innerCubes){
-		if (cube->GetPosition().y == 1){
+		if (cube->GetPosition().y == distance){
 			int index = cube->GetIndex();
 			glm::mat4 rot = shapes[index]->getRot();
 			glm::mat4 rotTransposed = glm::transpose(rot);
@@ -232,7 +229,7 @@ void Game::rotateUp()
 			rubikCube->rotateUp(direction);
 		}
 	}
-	rubikCube->printCubes();
+	// rubikCube->printCubes();
 }
 
 void Game::rotateDown()
@@ -241,9 +238,8 @@ void Game::rotateDown()
 
 	std::vector<InnerCube *> innerCubes = rubikCube->GetInnerCubes();
 	for (InnerCube* cube : innerCubes){
-		if (cube->GetPosition().y == -1){
+		if (cube->GetPosition().y == -distance){
 			int index = cube->GetIndex();
-			std::cout << "index: " << index << std::endl;
 			glm::mat4 rot = shapes[index]->getRot();
 			glm::mat4 rotTransposed = glm::transpose(rot);
 			glm::vec3 vector = glm::vec3(0, 1, 0);
@@ -254,14 +250,13 @@ void Game::rotateDown()
 	}
 	downAngle += RotationAngle*direction;
 	if (abs(fmod(downAngle, 90.0)) == 0){
-		std::cout << "downAngle: " << downAngle << std::endl;
 		int rotationTimes = abs(downAngle / 90);
 		downAngle = 0.0;
 		for (int i = 0; i < rotationTimes; i++){
 			rubikCube->rotateDown(direction);
 		}
 	}
-	rubikCube->printCubes();
+	// rubikCube->printCubes();
 }
 
 void Game::multiplyAngle(float factor)
