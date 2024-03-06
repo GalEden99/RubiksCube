@@ -9,9 +9,11 @@ files added :
    - Components/RubikCube.h
 
 files edited : 
-   - game.cpp
-   - game.h
-   - inputManager.height
+   - Game/game.cpp
+   - Game/game.h
+   - Game/inputManager.h
+   - Game/scene.cpp
+   - Game/scene.h
 
 Bounuses : 
    - 2X2 RubikCube
