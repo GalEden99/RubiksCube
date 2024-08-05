@@ -1,4 +1,4 @@
-# Rubik's Cube
+# Rubik's Cube 
 
 This project involves rendering a dynamic Rubik's cube, providing an interactive 3D experience where users can manipulate the cube through keyboard and mouse inputs. The implementation includes building the cube, creating appropriate data structures, handling rotations, and enabling user interactions.
 
@@ -52,4 +52,4 @@ The dynamic Rubik's cube project includes the following features:
 5. Advanced support for various cube sizes and solving algorithms.
 
 # Screenshots
-|<img style="max-width:200px; width:100%"  src="https://github.com/GalEden99/RubiksCube/blob/master/RubiksCube.png" alt="rubiksCube" >|
+<img style="max-width:100px; width:40%"  src="https://github.com/GalEden99/RubiksCube/blob/master/RubiksCube.png" alt="rubiksCube" >
